@@ -23,9 +23,11 @@ opt_var = cmake.subproject_options()
 opt_var.add_cmake_defines({'CONFIG_LV_BUILD_EXAMPLES': 'OFF',
                            'CONFIG_LV_BUILD_DEMOS': 'OFF',
 			   'LV_CONF_INCLUDE_SIMPLE': true,
+			   
 			   })
 
 lvgl_proj = cmake.subproject('lvgl', options: opt_var)
+# add_project_arguments('-D_DEFAULT_SOURCE', language: 'c')
 lvgl_dep = lvgl_proj.dependency('lvgl')
 
 call_processor_deps = [lvgl_dep]

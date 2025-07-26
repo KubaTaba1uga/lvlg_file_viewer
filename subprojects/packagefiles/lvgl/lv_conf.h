@@ -12,7 +12,7 @@
  */
 
 /* clang-format off */
-#if 0 /* Set this to "1" to enable content */
+#if 1 /* Set this to "1" to enable content */
 
 #ifndef LV_CONF_H
 #define LV_CONF_H
@@ -1175,7 +1175,7 @@
 #endif
 
 /** Use X11 to open window on Linux desktop and handle mouse and keyboard */
-#define LV_USE_X11              0
+#define LV_USE_X11              1
 #if LV_USE_X11
     #define LV_X11_DIRECT_EXIT         1  /**< Exit application when all X11 windows have been closed */
     #define LV_X11_DOUBLE_BUFFER       1  /**< Use double buffers for rendering */

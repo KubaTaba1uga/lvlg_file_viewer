@@ -16,13 +16,17 @@ int main(void) {
   lv_init();
 
   lv_tick_set_cb(my_get_millis);
+  lv_display_t *disp = lv_x11_window_create("LVGL X11 Simulation", 200, 600);
 
-  lv_display_t *display = lv_display_create(320, 240);
+  lv_x11_inputs_create(disp, NULL);
+
+  /* lv_display_t *display = lv_display_create(320, 240); */
 
   /* /\*LVGL will render to this 1/10 screen sized buffer for 2 bytes/pixel*\/
    */
-  static uint8_t buf[320 * 240 / 10 * 2];
-  lv_display_set_buffers(display, buf, NULL, LV_DISPLAY_RENDER_MODE_PARTIAL);
+  /* static uint8_t buf[320 * 240 / 10 * 2]; */
+  /* lv_display_set_buffers(display, buf, NULL, LV_DISPLAY_RENDER_MODE_PARTIAL);
+   */
 
   /* /\*This callback will display the rendered image*\/ */
 
