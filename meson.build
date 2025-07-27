@@ -28,8 +28,14 @@ lvgl_dep = lvgl_proj.dependency('lvgl')
 ## Add X11
 x11_dep  = dependency('x11', required: true)
 
+## Add errors lib
+c_minilib_error_dep = dependency('c_minilib_error',
+  fallback: ['c_minilib_error', 'c_minilib_error_dep'],
+  required: true,
+)
+
 ## Add app
-lvgl_file_viewer_deps = [lvgl_dep, x11_dep]
+lvgl_file_viewer_deps = [lvgl_dep, x11_dep, c_minilib_error_dep]
 lvgl_file_viewer_inc = include_directories('src')
 add_project_arguments('-D_GNU_SOURCE', language: 'c')
 if get_option('buildtype').startswith('debug')
