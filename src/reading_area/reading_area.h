@@ -199,10 +199,8 @@ void show_reading_area(lv_obj_t *main_obj) {
   lv_obj_align(reading_area, LV_ALIGN_TOP_LEFT, 0, 5);
 
   lv_obj_t *text = lv_label_create(reading_area);
-  /* lv_obj_set_size(text, lv_pct(100), lv_pct(100)); */
   lv_obj_set_width(text, lv_pct(100));
   lv_label_set_text(text, long_text);
-  /* lv_label_set_long_mode(text, LV_LABEL_LONG_WRAP); */
 };
 
 #endif // LVGL_FILE_VIEWER_READING_AREA_H

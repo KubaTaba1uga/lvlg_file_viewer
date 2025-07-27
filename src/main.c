@@ -33,13 +33,17 @@ int main(void) {
   lv_obj_set_flex_flow(main_col, LV_FLEX_FLOW_COLUMN);
 
   show_tiltle_bar(title, main_col);
+
+  // TO-DO read file from path
   show_reading_area(main_col);
 
-  /* Make LVGL periodically execute its tasks */
-  while (1) {
-    /* lv_task_handler(); */
-    usleep(lv_timer_handler());
+  uint32_t idle_time;
+  while (true) {
+    idle_time = lv_timer_handler();
+    usleep(idle_time * 1000);
   }
+
+  cstr_drop(&title);
 
   return 0;
 }
