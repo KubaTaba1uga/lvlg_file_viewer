@@ -45,7 +45,7 @@ void lv_example_flex_1(void) {
 
 void show_tiltle_bar(cstr title, lv_obj_t *main_obj) {
   lv_obj_t *title_row = lv_obj_create(main_obj);
-  lv_obj_set_size(title_row, SCREEN_WIDTH - 50, 75);
+  lv_obj_set_size(title_row, SCREEN_WIDTH - 50, lv_pct(10));
   lv_obj_align(title_row, LV_ALIGN_TOP_LEFT, 0, 5);
   lv_obj_t *label = lv_label_create(title_row);
   lv_label_set_text(label, cstr_str(&title));

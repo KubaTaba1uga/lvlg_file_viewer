@@ -5,6 +5,7 @@
 #include <time.h>
 #include <unistd.h>
 
+#include "reading_area/reading_area.h"
 #include "title_bar/title_bar.h"
 #include "utils/settings.h"
 #include "x11_driver/x11_driver.h"
@@ -32,6 +33,7 @@ int main(void) {
   lv_obj_set_flex_flow(main_col, LV_FLEX_FLOW_COLUMN);
 
   show_tiltle_bar(title, main_col);
+  show_reading_area(main_col);
 
   /* Make LVGL periodically execute its tasks */
   while (1) {
