@@ -3,6 +3,9 @@
 
 #include "c_minilib_error.h"
 #include "lvgl.h"
+#include "stc/cstr.h"
+#include "utils/settings.h"
+#include <src/misc/lv_area.h>
 
 void lv_example_flex_1(void) {
   /*Create a container with ROW flex direction*/
@@ -39,5 +42,14 @@ void lv_example_flex_1(void) {
     lv_obj_center(label);
   }
 }
+
+void show_tiltle_bar(cstr title, lv_obj_t *main_obj) {
+  lv_obj_t *title_row = lv_obj_create(main_obj);
+  lv_obj_set_size(title_row, SCREEN_WIDTH - 50, 75);
+  lv_obj_align(title_row, LV_ALIGN_TOP_LEFT, 0, 5);
+  lv_obj_t *label = lv_label_create(title_row);
+  lv_label_set_text(label, cstr_str(&title));
+  lv_obj_center(label);
+};
 
 #endif // LVGL_FILE_VIEWER_TITLE_BAR_H

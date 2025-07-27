@@ -1,10 +1,12 @@
 #include <lvgl.h>
+#include <stc/cstr.h>
 #include <stdint.h>
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
 
 #include "title_bar/title_bar.h"
+#include "utils/settings.h"
 #include "x11_driver/x11_driver.h"
 
 uint32_t my_get_millis(void) {
@@ -23,14 +25,13 @@ int main(void) {
   init_x11_driver();
 
   // TO-DO read path from args
+  cstr title = cstr_from("My Super Secret File");
 
-  /*Create a white label, set its text and align it to the center*/
-  /* lv_obj_t *label = lv_label_create(lv_screen_active()); */
-  /* lv_label_set_text(label, "Title"); */
-  /* lv_obj_set_style_text_color(lv_screen_active(), lv_color_hex(0xffffff), */
-  /*                             LV_PART_MAIN); */
+  lv_obj_t *main_col = lv_obj_create(lv_screen_active());
+  lv_obj_set_size(main_col, SCREEN_WIDTH, SCREEN_HEIGHT);
+  lv_obj_set_flex_flow(main_col, LV_FLEX_FLOW_COLUMN);
 
-  lv_example_flex_1();
+  show_tiltle_bar(title, main_col);
 
   /* Make LVGL periodically execute its tasks */
   while (1) {

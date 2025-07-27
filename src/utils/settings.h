@@ -1,0 +1,8 @@
+#ifndef LVGL_FILE_VIEWER_UTILS_SETTINGS_H
+#define LVGL_FILE_VIEWER_UTILS_SETTINGS_H
+
+// TO-DO: set width and heigth dynamically
+#define SCREEN_WIDTH 600
+#define SCREEN_HEIGHT 800
+
+#endif // LVGL_FILE_VIEWER_UTILS_SETTINGS_H
