@@ -14,11 +14,7 @@ project('lvgl_file_viewer', 'c',
 # ******************************************************************************
 # *    App
 # ******************************************************************************
-add_project_arguments('-D_GNU_SOURCE', language: 'c')
-if get_option('buildtype').startswith('debug')
-  add_project_arguments(['-fno-inline', '-fno-inline-functions', '-DDEBUG'], language : 'c')
-endif
-
+## Add LVGL
 cmake = import('cmake')
 opt_var = cmake.subproject_options()
 opt_var.add_cmake_defines({'CONFIG_LV_BUILD_EXAMPLES': 'OFF',
@@ -27,21 +23,25 @@ opt_var.add_cmake_defines({'CONFIG_LV_BUILD_EXAMPLES': 'OFF',
 			   })
 opt_var.append_compile_args('c', '-D_GNU_SOURCE')
 lvgl_proj = cmake.subproject('lvgl', options: opt_var)
-
 lvgl_dep = lvgl_proj.dependency('lvgl')
+
+## Add X11
 x11_dep  = dependency('x11', required: true)
 
-call_processor_deps = [lvgl_dep, x11_dep]
-
-call_processor_inc = include_directories('src', 'subprojects/lvgl')
-# call_processor_inc = include_directories('src')
+## Add app
+lvgl_file_viewer_deps = [lvgl_dep, x11_dep]
+lvgl_file_viewer_inc = include_directories('src')
+add_project_arguments('-D_GNU_SOURCE', language: 'c')
+if get_option('buildtype').startswith('debug')
+  add_project_arguments(['-fno-inline', '-fno-inline-functions', '-DDEBUG'], language : 'c')
+endif
 
 subdir('src')
 
-executable('call_processor',
+executable('lvgl_file_viewer',
   sources: sources,
-  include_directories: call_processor_inc,
-  dependencies: call_processor_deps,
+  include_directories: lvgl_file_viewer_inc,
+  dependencies: lvgl_file_viewer_deps,
   c_args: []
 )
 
