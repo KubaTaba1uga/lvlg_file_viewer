@@ -2,6 +2,7 @@
 #include <stc/cstr.h>
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <time.h>
 #include <unistd.h>
 
@@ -18,16 +19,19 @@ uint32_t my_get_millis(void) {
 
 void my_btn_event_cb(lv_event_t *e) { printf("Clicked\n"); }
 
-int main(void) {
+int main(int argc, char *argv[]) {
+  if (argc != 2) {
+    puts("Usage: lvgl_file_viewer <file path>");
+    exit(EXIT_FAILURE);
+  }
+
   lv_init();
 
   lv_tick_set_cb(my_get_millis);
 
-  // TO-DO set size based on window size
   init_x11_driver();
 
-  // TO-DO read path from args
-  cstr title = cstr_from("My Super Secret File");
+  cstr title = cstr_from(argv[1]);
 
   lv_obj_t *main_col = lv_obj_create(lv_screen_active());
   lv_obj_set_size(main_col, lv_pct(100), lv_pct(100));
