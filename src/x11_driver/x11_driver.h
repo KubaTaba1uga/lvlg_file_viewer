@@ -4,10 +4,13 @@
 #include "c_minilib_error.h"
 #include "lvgl.h"
 #include "utils/settings.h"
+#include <src/display/lv_display.h>
+#include <src/misc/lv_event.h>
+#include <stdio.h>
 
-cme_error_t init_x11_driver(void) {
+static inline cme_error_t init_x11_driver(void) {
   lv_display_t *disp =
-      lv_x11_window_create("LVGL X11 Simulation", SCREEN_WIDTH, SCREEN_HEIGHT);
+      lv_x11_window_create("LVGL File Viewer", SCREEN_WIDTH, SCREEN_HEIGHT);
   cme_error_t err;
 
   if (!disp) {

@@ -23,13 +23,14 @@ int main(void) {
 
   lv_tick_set_cb(my_get_millis);
 
+  // TO-DO set size based on window size
   init_x11_driver();
 
   // TO-DO read path from args
   cstr title = cstr_from("My Super Secret File");
 
   lv_obj_t *main_col = lv_obj_create(lv_screen_active());
-  lv_obj_set_size(main_col, SCREEN_WIDTH, SCREEN_HEIGHT);
+  lv_obj_set_size(main_col, lv_pct(100), lv_pct(100));
   lv_obj_set_flex_flow(main_col, LV_FLEX_FLOW_COLUMN);
 
   show_tiltle_bar(title, main_col);

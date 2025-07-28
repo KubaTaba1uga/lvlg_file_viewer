@@ -195,7 +195,8 @@ const char *long_text =
 
 void show_reading_area(lv_obj_t *main_obj) {
   lv_obj_t *reading_area = lv_obj_create(main_obj);
-  lv_obj_set_size(reading_area, SCREEN_WIDTH - 50, lv_pct(85));
+
+  lv_obj_set_size(reading_area, lv_pct(100), lv_pct(85));
   lv_obj_align(reading_area, LV_ALIGN_TOP_LEFT, 0, 5);
 
   lv_obj_t *text = lv_label_create(reading_area);
