@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 #include "reading_area/reading_area.h"
+#include "stc/cstr.h"
 #include "title_bar/title_bar.h"
 #include "utils/settings.h"
 #include "x11_driver/x11_driver.h"
@@ -26,29 +27,40 @@ int main(int argc, char *argv[]) {
   }
 
   lv_init();
-
   lv_tick_set_cb(my_get_millis);
-
   init_x11_driver();
-
-  cstr title = cstr_from(argv[1]);
 
   lv_obj_t *main_col = lv_obj_create(lv_screen_active());
   lv_obj_set_size(main_col, lv_pct(100), lv_pct(100));
   lv_obj_set_flex_flow(main_col, LV_FLEX_FLOW_COLUMN);
 
-  show_tiltle_bar(title, main_col);
+  cstr file_path = cstr_from(argv[1]);
+  show_tiltle_bar(file_path, main_col);
 
-  // TO-DO read file from path
-  show_reading_area(main_col);
+  FILE *fp = fopen(cstr_str(&file_path), "rb");
+  if (!fp) {
+    perror("Cannot open file");
+    exit(EXIT_FAILURE);
+  }
+
+  cstr file_buf = cstr_with_capacity(16 * 1024);
+  csview file_view = cstr_sv(&file_buf);
+
+  file_view.size =
+      fread((void *)file_view.buf, sizeof(char), cstr_capacity(&file_buf), fp);
+
+  show_reading_area(file_view, main_col);
+  fclose(fp);
 
   uint32_t idle_time;
   while (true) {
     idle_time = lv_timer_handler();
-    usleep(idle_time * 1000);
+    usleep(idle_time * 10000);
   }
 
-  cstr_drop(&title);
+  lv_obj_del(main_col);
+  cstr_drop(&file_path);
+  cstr_drop(&file_buf);
 
   return 0;
 }
