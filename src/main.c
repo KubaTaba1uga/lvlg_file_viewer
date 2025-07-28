@@ -1,4 +1,5 @@
 #include <lvgl.h>
+#include <src/indev/lv_indev.h>
 #include <stc/cstr.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -55,7 +56,7 @@ int main(int argc, char *argv[]) {
   uint32_t idle_time;
   while (true) {
     idle_time = lv_timer_handler();
-    usleep(idle_time * 10000);
+    usleep(idle_time * 50000);
   }
 
   lv_obj_del(main_col);
