@@ -53,11 +53,14 @@ int main(int argc, char *argv[]) {
   show_reading_area(file_view, main_col);
   fclose(fp);
 
-  uint32_t idle_time;
-  while (true) {
-    idle_time = lv_timer_handler();
-    usleep(idle_time * 50000);
-  }
+  lv_task_handler();
+  lv_task_handler();
+  /* uint32_t idle_time; */
+  /* while (true) { */
+  /*   idle_time = lv_timer_handler(); */
+  /*   usleep(idle_time * 50000); */
+  /* } */
+  sleep(-1);
 
   lv_obj_del(main_col);
   cstr_drop(&file_path);
